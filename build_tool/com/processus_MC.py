@@ -25,7 +25,7 @@ def emergency_stop(arduino, value):
         arduino.write(int.to_bytes(frame, 2, byteorder ='big')) #We send the requested frame
 
 
-def forward_speed(value):
+def forward_speed(arduino, value):
     '''Function to send the requested speed to move forward to the MC'''
     type = 0x02
     frame = type << 8 #Frame creation
@@ -35,7 +35,7 @@ def forward_speed(value):
     arduino.write(int.to_bytes(frame, 2, byteorder ='big')) #We send the requested frame
 
 
-def backward_speed(value):
+def backward_speed(arduino, value):
     '''Function to send the requested speed to move back<ard to the MC'''
     type = 0x03
     frame = type << 8 #Frame creation
@@ -45,7 +45,7 @@ def backward_speed(value):
     arduino.write(int.to_bytes(frame, 2, byteorder ='big')) #We send the requested frame
 
 
-def actual_speed():
+def actual_speed(arduino):
     '''Function to request the actual speed'''
     while True :
         type=arduino.read()
@@ -54,7 +54,7 @@ def actual_speed():
             return value*(S_MAXI/255)
         
 
-def actual_angle():
+def actual_angle(arduino):
     '''Function to request the actual angle'''
     while True :
         type=arduino.read()
